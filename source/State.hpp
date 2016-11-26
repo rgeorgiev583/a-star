@@ -30,6 +30,7 @@ namespace SlidingBlocks
                 delete data[i];
 
             delete data;
+            data = nullptr;
         }
 
     protected:
