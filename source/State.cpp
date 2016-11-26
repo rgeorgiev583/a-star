@@ -54,7 +54,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
             if (emptyCellY < Size() - 1)
             {
                 (*moved)[moved->emptyCellY][moved->emptyCellX] = (*moved)[moved->emptyCellY + 1][moved->emptyCellX];
-                moved->emptyCellX++;
+                moved->emptyCellY++;
                 canMove = true;
             }
             break;
@@ -63,7 +63,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
             if (emptyCellY > 0)
             {
                 (*moved)[moved->emptyCellY][moved->emptyCellX] = (*moved)[moved->emptyCellY - 1][moved->emptyCellX];
-                moved->emptyCellX--;
+                moved->emptyCellY--;
                 canMove = true;
             }
             break;
