@@ -6,13 +6,14 @@
 SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0)  { }
 
 SlidingBlocks::State::State(int n, int from)
+SlidingBlocks::State::State(int n, int begin): SquareMatrix<int>(n)
 {
-    size = n;
-    int block = from;
-
     for (int i = 0; i < size; i++)
         for (int j = 0; j < size; j++)
-            data[i][j] = block == 9 ? block++ : 0;
+            data[i][j] = begin++;
+
+    emptyCellX = emptyCellY = size - 1;
+    data[emptyCellY][emptyCellX] = 0;
 }
 
 SlidingBlocks::State::State(const SquareMatrix<int>& matrix, int _emptyCellY, int _emptyCellX):
