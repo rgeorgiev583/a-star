@@ -33,8 +33,8 @@ SlidingBlocks::State::State(int n, int from)
             data[i][j] = block == 9 ? block++ : 0;
 }
 
-SlidingBlocks::State::State(const SquareMatrix<int>& , int _emptyCellY, int _emptyCellX):
-        SquareMatrix<int>(), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX)  {}
+SlidingBlocks::State::State(const SquareMatrix<int>& matrix, int _emptyCellY, int _emptyCellX):
+        SquareMatrix<int>(matrix), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX)  { }
 
 bool SlidingBlocks::State::operator==(const SlidingBlocks::State& other) const
 {
