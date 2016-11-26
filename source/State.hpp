@@ -10,6 +10,28 @@ namespace SlidingBlocks
     template <typename T>
     class SquareMatrix
     {
+        void copy(const SquareMatrix& other)
+        {
+            size = other.size;
+            data = new T*[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                data[i] = new T[size];
+
+                for (int j = 0; j < size; j++)
+                    data[i][j] = other.data[i][j];
+            }
+        }
+
+        void destroy()
+        {
+            for (int i = 0; i < size; i++)
+                delete data[i];
+
+            delete data;
+        }
+
     protected:
         T** data;
         int size;
@@ -22,6 +44,24 @@ namespace SlidingBlocks
 
             for (int i = 0; i < size; i++)
                 data[i] = new T[size];
+        }
+        SquareMatrix(const SquareMatrix& other): data(nullptr)
+        {
+            copy(other);
+        }
+        SquareMatrix& operator=(const SquareMatrix& other)
+        {
+            if (&other != this)
+            {
+                destroy();
+                copy(other);
+            }
+
+            return *this;
+        }
+        ~SquareMatrix()
+        {
+            destroy();
         }
 
         bool operator==(const SquareMatrix& other) const
