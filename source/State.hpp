@@ -37,7 +37,7 @@ namespace SlidingBlocks
         int size;
 
     public:
-        SquareMatrix(): data(nullptr), size(0)  {}
+        SquareMatrix(): data(nullptr), size(0)  { }
         SquareMatrix(int _size): data(nullptr), size(_size)
         {
             data = new T*[size];
@@ -77,11 +77,10 @@ namespace SlidingBlocks
             return true;
         }
 
-        int Size() const  { return size; }
+        int Size() const                  { return size; }
 
         const T* operator[](int i) const  { return data[i]; }
         T* operator[](int i)              { return data[i]; }
-
     };
 
     enum class Step  { Left, Right, Down, Up };
