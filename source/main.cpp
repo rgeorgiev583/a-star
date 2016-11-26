@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 #include "AStar.hpp"
 
@@ -6,7 +7,22 @@ int main()
 {
     int n;
     scanf("%d", &n);
-    SlidingBlocks::State begin(n, 1), end(begin.Size(), 1);
+    int size = sqrt(n + 1), emptyCellY = 0, emptyCellX = 0;
+    SlidingBlocks::SquareMatrix<int> beginMatrix(size);
+
+    for (int i = 0; i < size; i++)
+        for (int j = 0; j < size; j++)
+        {
+            scanf("%d", &beginMatrix[i][j]);
+
+            if (beginMatrix[i][j] == 0)
+            {
+                emptyCellY = i;
+                emptyCellX = j;
+            }
+        }
+
+    SlidingBlocks::State begin(std::move(beginMatrix), emptyCellY, emptyCellX), end(size, 1);
     auto path = std::move(SlidingBlocks::FindPath(begin, end));
 
     printf("%d\n", path.size());

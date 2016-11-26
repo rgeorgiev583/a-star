@@ -1,27 +1,9 @@
-#include <cmath>
 #include <utility>
 
 #include "State.hpp"
 
 
-SlidingBlocks::State::State()
-{
-    int n;
-    scanf("%d", n);
-    size = sqrt(n + 1);
-
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++)
-        {
-            scanf("%d", &data[i][j]);
-
-            if (data[i][j] == 0)
-            {
-                emptyCellY = i;
-                emptyCellX = j;
-            }
-        }
-}
+SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0)  { }
 
 SlidingBlocks::State::State(int n, int from)
 {
