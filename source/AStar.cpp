@@ -1,3 +1,5 @@
+#include <vector>
+#include <list>
 #include <algorithm>
 #include <memory>
 
@@ -13,7 +15,8 @@ int SlidingBlocks::Node::GetScore() const
 
 SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
 {
-    NodeSet openSet, closedSet;
+    std::list<NodePtr> openSet;
+    std::vector<NodePtr> closedSet;
     NodePtr currentNode = nullptr;
     openSet.push_back(std::make_shared<Node>(std::make_shared<State>(source)));
 

@@ -27,8 +27,6 @@ namespace SlidingBlocks
         int GetScore() const;
     };
 
-    using NodeSet = std::vector<NodePtr>;
-
     StateList FindPath(const State& source, const State& target, HeuristicFunction heuristic = ManhattanDistance);
 }
 
