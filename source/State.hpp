@@ -1,8 +1,6 @@
 #ifndef __STATE__
 #define __STATE__
 
-#include <cstddef>
-#include <utility>
 #include <memory>
 
 namespace SlidingBlocks
