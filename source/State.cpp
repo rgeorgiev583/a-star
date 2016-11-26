@@ -5,7 +5,6 @@
 
 SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0)  { }
 
-SlidingBlocks::State::State(int n, int from)
 SlidingBlocks::State::State(int n, int begin): SquareMatrix<int>(n)
 {
     for (int i = 0; i < size; i++)
