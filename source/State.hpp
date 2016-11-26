@@ -94,7 +94,7 @@ namespace SlidingBlocks
     public:
         State();
         State(int n, int from);
-        State(const SquareMatrix<int>& matrix, int emptyCellY_, int emptyCellX_);
+        State(const SquareMatrix<int>& matrix, int emptyCellY_ = 0, int emptyCellX_ = 0);
 
         bool operator==(const State& other) const;
         std::shared_ptr<State> Move(Step movement) const;
