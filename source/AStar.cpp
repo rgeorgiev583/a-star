@@ -14,7 +14,7 @@ int SlidingBlocks::Node::GetScore() const
 SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
 {
     NodeSet openSet, closedSet;
-    NodePtr current = nullptr;
+    NodePtr currentNode = nullptr;
     openSet.push_back(std::make_shared<Node>(std::make_shared<State>(source)));
 
     while (!openSet.empty())
@@ -23,16 +23,16 @@ SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const Stat
             return a->GetScore() <= b->GetScore();
         });
 
-        current = *currentPos;
-        if (*current->State == target)
+        currentNode = *currentPos;
+        if (*currentNode->State == target)
             break;
 
-        closedSet.push_back(current);
+        closedSet.push_back(currentNode);
         openSet.erase(currentPos);
 
-        auto move = [&target, heuristic, &openSet, &closedSet, current](Step movement)
+        auto move = [&target, heuristic, &openSet, &closedSet, currentNode](Step movement)
         {
-            auto neighbor = current->State->Move(movement);
+            auto neighbor = currentNode->State->Move(movement);
             if (!neighbor)
                 return;
 
@@ -44,20 +44,21 @@ SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const Stat
             if (closedSet.end() != std::find_if(closedSet.begin(), closedSet.end(), checkIfIsEqualToNeighbor))
                 return;
 
-            int totalCost = current->G + 1;
+            int totalCost = currentNode->G + 1;
 
             auto successorPos = std::find_if(openSet.begin(), openSet.end(), checkIfIsEqualToNeighbor);
             auto successor = *successorPos;
+
             if (openSet.end() == successorPos)
             {
-                auto successorNode = std::make_shared<Node>(neighbor, current);
+                auto successorNode = std::make_shared<Node>(neighbor, currentNode);
                 successor->G = totalCost;
                 successor->H = heuristic(*successorNode->State, target);
                 openSet.push_back(successorNode);
             }
             else if (totalCost < successor->G)
             {
-                successor->Parent = current;
+                successor->Parent = currentNode;
                 successor->G = totalCost;
             }
         };
@@ -70,10 +71,10 @@ SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const Stat
 
     StateList path;
 
-    while (current)
+    while (currentNode)
     {
-        path.push_back(current->State);
-        current = current->Parent;
+        path.push_back(currentNode->State);
+        currentNode = currentNode->Parent;
     }
 
     return path;
