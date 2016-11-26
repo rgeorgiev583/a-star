@@ -80,9 +80,9 @@ void SlidingBlocks::State::Print() const
     {
         for (int j = 0; j < size; j++)
             printf("%d ", data[i][j]);
-    }
 
-    printf("\n");
+        printf("\n");
+    }
 }
 
 int SlidingBlocks::ManhattanDistance(const State& from, const State& to)
