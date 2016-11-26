@@ -60,7 +60,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
             break;
 
         case Step::Up:
-            if (emptyCellY < Size() - 1)
+            if (emptyCellY > 0)
             {
                 moved[moved.emptyCellY][moved.emptyCellX] = moved[moved.emptyCellY - 1][moved.emptyCellX];
                 moved.emptyCellX--;
