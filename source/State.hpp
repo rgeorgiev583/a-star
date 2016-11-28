@@ -5,17 +5,16 @@
 
 namespace SlidingBlocks
 {
-    template <typename T>
-    class SquareMatrix
+    class SquareIntMatrix
     {
-        void copy(const SquareMatrix& other)
+        void copy(const SquareIntMatrix& other)
         {
             size = other.size;
-            data = new T*[size];
+            data = new int*[size];
 
             for (int i = 0; i < size; i++)
             {
-                data[i] = new T[size];
+                data[i] = new int[size];
 
                 for (int j = 0; j < size; j++)
                     data[i][j] = other.data[i][j];
@@ -32,25 +31,25 @@ namespace SlidingBlocks
         }
 
     protected:
-        T** data;
+        int** data;
         int size;
 
     public:
-        SquareMatrix(): data(nullptr), size(0)
+        SquareIntMatrix(): data(nullptr), size(0)
         {
         }
-        SquareMatrix(int _size): data(nullptr), size(_size)
+        SquareIntMatrix(int _size): data(nullptr), size(_size)
         {
-            data = new T*[size];
+            data = new int*[size];
 
             for (int i = 0; i < size; i++)
-                data[i] = new T[size];
+                data[i] = new int[size];
         }
-        SquareMatrix(const SquareMatrix& other): data(nullptr)
+        SquareIntMatrix(const SquareIntMatrix& other): data(nullptr)
         {
             copy(other);
         }
-        SquareMatrix& operator=(const SquareMatrix& other)
+        SquareIntMatrix& operator=(const SquareIntMatrix& other)
         {
             if (&other != this)
             {
@@ -60,12 +59,12 @@ namespace SlidingBlocks
 
             return *this;
         }
-        ~SquareMatrix()
+        ~SquareIntMatrix()
         {
             destroy();
         }
 
-        bool operator==(const SquareMatrix& other) const
+        bool operator==(const SquareIntMatrix& other) const
         {
             if (size != other.Size())
                 return false;
@@ -80,13 +79,13 @@ namespace SlidingBlocks
 
         int Size() const                  { return size; }
 
-        const T* operator[](int i) const  { return data[i]; }
-        T* operator[](int i)              { return data[i]; }
+        const int* operator[](int i) const  { return data[i]; }
+        int* operator[](int i)              { return data[i]; }
     };
 
     enum class Step  { None, Left, Right, Down, Up };
 
-    class State: public SquareMatrix<int>
+    class State: public SquareIntMatrix
     {
         int emptyCellY, emptyCellX;
         Step movement;
@@ -94,7 +93,7 @@ namespace SlidingBlocks
     public:
         State();
         State(int n, int from);
-        State(const SquareMatrix<int>& matrix, int emptyCellY_ = 0, int emptyCellX_ = 0);
+        State(const SquareIntMatrix& matrix, int emptyCellY_ = 0, int emptyCellX_ = 0);
 
         Step GetMovement() const  { return movement; }
 

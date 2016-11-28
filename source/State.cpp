@@ -5,7 +5,7 @@
 
 SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0), movement(SlidingBlocks::Step::None)  { }
 
-SlidingBlocks::State::State(int n, int begin): SquareMatrix<int>(n), movement(SlidingBlocks::Step::None)
+SlidingBlocks::State::State(int n, int begin): SquareIntMatrix(n), movement(SlidingBlocks::Step::None)
 {
     for (int i = 0; i < size; i++)
         for (int j = 0; j < size; j++)
@@ -15,12 +15,12 @@ SlidingBlocks::State::State(int n, int begin): SquareMatrix<int>(n), movement(Sl
     data[emptyCellY][emptyCellX] = 0;
 }
 
-SlidingBlocks::State::State(const SquareMatrix<int>& matrix, int _emptyCellY, int _emptyCellX):
-        SquareMatrix<int>(matrix), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX), movement(SlidingBlocks::Step::None)  { }
+SlidingBlocks::State::State(const SquareIntMatrix& matrix, int _emptyCellY, int _emptyCellX):
+        SquareIntMatrix(matrix), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX), movement(SlidingBlocks::Step::None)  { }
 
 bool SlidingBlocks::State::operator==(const SlidingBlocks::State& other) const
 {
-    return SquareMatrix<int>::operator==(other) &&
+    return SquareIntMatrix::operator==(other) &&
            emptyCellX == other.emptyCellX && emptyCellY == other.emptyCellY;
 }
 

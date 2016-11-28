@@ -8,7 +8,7 @@ int main()
     int n;
     scanf("%d", &n);
     int size = sqrt(n + 1), emptyCellY = 0, emptyCellX = 0;
-    SlidingBlocks::SquareMatrix<int> beginMatrix(size);
+    SlidingBlocks::SquareIntMatrix beginMatrix(size);
 
     for (int i = 0; i < size; i++)
         for (int j = 0; j < size; j++)
