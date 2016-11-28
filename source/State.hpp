@@ -82,7 +82,7 @@ namespace SlidingBlocks
         T* operator[](int i)              { return data[i]; }
     };
 
-    enum class Step  { Left, Right, Down, Up };
+    enum class Step  { None, Left, Right, Down, Up };
 
     class State: public SquareMatrix<int>
     {
