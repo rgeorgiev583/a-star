@@ -19,9 +19,9 @@ namespace SlidingBlocks
 
     struct Node
     {
-        int G, H;
         StatePtr State;
         NodePtr Parent;
+        int G, H;
 
         Node(StatePtr state, NodePtr parent = nullptr);
 
