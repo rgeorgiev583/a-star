@@ -35,7 +35,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
         case Step::Left:
             if (emptyCellX < Size() - 1)
             {
-                (*moved)[moved->emptyCellY][moved->emptyCellX] = (*moved)[moved->emptyCellY][moved->emptyCellX + 1];
+                moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY][moved->emptyCellX + 1];
                 moved->emptyCellX++;
                 canMove = true;
             }
@@ -44,7 +44,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
         case Step::Right:
             if (emptyCellX > 0)
             {
-                (*moved)[moved->emptyCellY][moved->emptyCellX] = (*moved)[moved->emptyCellY][moved->emptyCellX - 1];
+                moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY][moved->emptyCellX - 1];
                 moved->emptyCellX--;
                 canMove = true;
             }
@@ -53,7 +53,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
         case Step::Down:
             if (emptyCellY < Size() - 1)
             {
-                (*moved)[moved->emptyCellY][moved->emptyCellX] = (*moved)[moved->emptyCellY + 1][moved->emptyCellX];
+                moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY + 1][moved->emptyCellX];
                 moved->emptyCellY++;
                 canMove = true;
             }
@@ -62,7 +62,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
         case Step::Up:
             if (emptyCellY > 0)
             {
-                (*moved)[moved->emptyCellY][moved->emptyCellX] = (*moved)[moved->emptyCellY - 1][moved->emptyCellX];
+                moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY - 1][moved->emptyCellX];
                 moved->emptyCellY--;
                 canMove = true;
             }
@@ -70,7 +70,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
     }
 
     if (canMove)
-        (*moved)[emptyCellY][emptyCellX] = 0;
+        moved->data[emptyCellY][emptyCellX] = 0;
     return canMove ? moved : nullptr;
 }
 
