@@ -8,22 +8,19 @@
 
 SlidingBlocks::Node::Node(StatePtr state, NodePtr parent): State(state), Parent(parent), G(0), H(0)  { }
 
-int SlidingBlocks::Node::GetScore() const
-{
-    return G + H;
-}
-
 SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
 {
     std::list<NodePtr> openSet;
     std::vector<NodePtr> closedSet;
     NodePtr currentNode = nullptr;
-    openSet.push_back(std::make_shared<Node>(std::make_shared<State>(source)));
+    auto sourceNode = std::make_shared<Node>(std::make_shared<State>(source));
+    sourceNode->H = heuristic(source, target);
+    openSet.push_back(sourceNode);
 
     while (!openSet.empty())
     {
         auto currentPos = std::min_element(openSet.begin(), openSet.end(), [](auto a, auto b) {
-            return a->GetScore() <= b->GetScore();
+            return a->H <= b->H;
         });
 
         currentNode = *currentPos;
@@ -47,22 +44,21 @@ SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const Stat
             if (closedSet.end() != std::find_if(closedSet.begin(), closedSet.end(), checkIfIsEqualToNeighbor))
                 return;
 
-            int totalCost = currentNode->G + 1;
-
+            int totalCost = currentNode->G + ManhattanDistance(*currentNode->State, *neighbor);
             auto successorPos = std::find_if(openSet.begin(), openSet.end(), checkIfIsEqualToNeighbor);
-            auto successor = *successorPos;
 
             if (openSet.end() == successorPos)
             {
                 auto successorNode = std::make_shared<Node>(neighbor, currentNode);
                 successorNode->G = totalCost;
-                successorNode->H = heuristic(*successorNode->State, target);
+                successorNode->H = successorNode->G + heuristic(*neighbor, target);
                 openSet.push_back(successorNode);
             }
-            else if (totalCost < successor->G)
+            else
             {
-                successor->Parent = currentNode;
-                successor->G = totalCost;
+                auto successor = *successorPos;
+                if (totalCost >= successor->G)
+                    successor->Parent = currentNode;
             }
         };
 

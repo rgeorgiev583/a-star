@@ -24,8 +24,6 @@ namespace SlidingBlocks
         int G, H;
 
         Node(StatePtr state, NodePtr parent = nullptr);
-
-        int GetScore() const;
     };
 
     StateList FindPath(const State& source, const State& target, HeuristicFunction heuristic = ManhattanDistance);
