@@ -3,6 +3,7 @@
 
 #include <memory>
 
+
 namespace SlidingBlocks
 {
     class SquareIntMatrix
@@ -106,5 +107,6 @@ namespace SlidingBlocks
 
     int ManhattanDistance(const State& from, const State& to);
 }
+
 
 #endif  // __STATE__

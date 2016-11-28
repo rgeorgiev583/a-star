@@ -7,6 +7,7 @@
 
 #include "State.hpp"
 
+
 namespace SlidingBlocks
 {
     using StatePtr = std::shared_ptr<State>;
@@ -29,5 +30,6 @@ namespace SlidingBlocks
 
     StateList FindPath(const State& source, const State& target, HeuristicFunction heuristic = ManhattanDistance);
 }
+
 
 #endif  // __ASTAR__
