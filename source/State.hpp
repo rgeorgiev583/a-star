@@ -36,7 +36,9 @@ namespace SlidingBlocks
         int size;
 
     public:
-        SquareMatrix(): data(nullptr), size(0)  { }
+        SquareMatrix(): data(nullptr), size(0)
+        {
+        }
         SquareMatrix(int _size): data(nullptr), size(_size)
         {
             data = new T*[size];
@@ -94,10 +96,11 @@ namespace SlidingBlocks
         State(int n, int from);
         State(const SquareMatrix<int>& matrix, int emptyCellY_ = 0, int emptyCellX_ = 0);
 
-        bool operator==(const State& other) const;
-        std::shared_ptr<State> Move(Step movement) const;
-
         Step GetMovement() const  { return movement; }
+
+        bool operator==(const State& other) const;
+
+        std::shared_ptr<State> Move(Step movement) const;
 
         void Print() const;
     };
