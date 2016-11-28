@@ -8,7 +8,7 @@
 
 SlidingBlocks::Node::Node(StatePtr state, NodePtr parent): State(state), Parent(parent), G(0), H(0)  { }
 
-SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
+std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
 {
     std::list<NodePtr> openSet;
     std::vector<NodePtr> closedSet;
@@ -68,7 +68,7 @@ SlidingBlocks::StateList SlidingBlocks::FindPath(const State& source, const Stat
         move(Step::Up);
     }
 
-    StateList path;
+    std::vector<SlidingBlocks::StatePtr> path;
 
     while (currentNode)
     {
