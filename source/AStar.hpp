@@ -11,7 +11,6 @@
 namespace SlidingBlocks
 {
     using HeuristicFunction = std::function<int(const State&, const State&)>;
-
     using StatePtr = std::shared_ptr<State>;
     struct Node;
     using NodePtr = std::shared_ptr<Node>;
@@ -23,7 +22,10 @@ namespace SlidingBlocks
         int G, H;
 
         Node(StatePtr state, NodePtr parent = nullptr);
+
+        bool operator<(const Node& other);
     };
+
 
     std::vector<SlidingBlocks::StatePtr> FindPath(const State& source, const State& target, HeuristicFunction heuristic = ManhattanDistance);
 }

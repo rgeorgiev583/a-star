@@ -8,6 +8,11 @@
 
 SlidingBlocks::Node::Node(StatePtr state, NodePtr parent): State(state), Parent(parent), G(0), H(0)  { }
 
+bool SlidingBlocks::Node::operator<(const Node& other)
+{
+    return H < other.H;
+}
+
 std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
 {
     std::list<NodePtr> openSet;
@@ -19,9 +24,7 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source
 
     while (!openSet.empty())
     {
-        auto currentPos = std::min_element(openSet.begin(), openSet.end(), [](auto a, auto b) {
-            return a->H <= b->H;
-        });
+        auto currentPos = std::min_element(openSet.begin(), openSet.end());
 
         currentNode = *currentPos;
         if (*currentNode->State == target)
