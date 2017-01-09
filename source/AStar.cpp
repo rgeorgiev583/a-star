@@ -30,8 +30,8 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source
         if (*currentNode->State == target)
             break;
 
-        closedSet.push_back(currentNode);
         openSet.erase(currentPos);
+        closedSet.push_back(currentNode);
 
         auto move = [&target, heuristic, &openSet, &closedSet, currentNode](Step movement)
         {
@@ -49,20 +49,23 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source
 
             int totalCost = currentNode->G + ManhattanDistance(*currentNode->State, *neighbor);
             auto successorPos = std::find_if(openSet.begin(), openSet.end(), checkIfIsEqualToNeighbor);
+            NodePtr successor;
 
             if (openSet.end() == successorPos)
             {
-                auto successorNode = std::make_shared<Node>(neighbor, currentNode);
-                successorNode->G = totalCost;
-                successorNode->H = successorNode->G + heuristic(*neighbor, target);
-                openSet.push_back(successorNode);
+                successor = std::make_shared<Node>(neighbor, currentNode);
+                openSet.push_back(successor);
             }
             else
             {
-                auto successor = *successorPos;
+                successor = *successorPos;
                 if (totalCost >= successor->G)
-                    successor->Parent = currentNode;
+                    return;
             }
+
+            successor->Parent = currentNode;
+            successor->G = totalCost;
+            successor->H = successor->G + heuristic(*neighbor, target);
         };
 
         move(Step::Left);
