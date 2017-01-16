@@ -27,7 +27,7 @@ bool SlidingBlocks::State::operator==(const SlidingBlocks::State& other) const
 std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) const
 {
     auto canMove = false;
-    std::shared_ptr<State> moved = std::make_shared<SlidingBlocks::State>(*this);
+    auto moved = std::make_shared<SlidingBlocks::State>(*this);
     moved->movement = movement;
 
     switch (movement)

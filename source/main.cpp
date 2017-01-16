@@ -16,7 +16,7 @@ int main()
         {
             scanf("%d", &beginMatrix[i][j]);
 
-            if (beginMatrix[i][j] == 0)
+            if (0 == beginMatrix[i][j])
             {
                 emptyCellY = i;
                 emptyCellX = j;
