@@ -76,11 +76,12 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source
 
     std::vector<SlidingBlocks::StatePtr> path;
 
-    while (currentNode)
-    {
-        path.push_back(currentNode->State);
-        currentNode = currentNode->Parent;
-    }
+    if (!openSet.empty())
+        while (currentNode)
+        {
+            path.push_back(currentNode->State);
+            currentNode = currentNode->Parent;
+        }
 
     return path;
 }
