@@ -26,7 +26,7 @@ int main()
     SlidingBlocks::State begin(std::move(beginMatrix), emptyCellY, emptyCellX), end(size, 1);
     auto path = std::move(SlidingBlocks::FindPath(begin, end));
 
-    printf("%d\n", path.size());
+    printf("%d\n", path.size() - 1);
 
     for (auto node: path)
         switch (node->GetMovement())
