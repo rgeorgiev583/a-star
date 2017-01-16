@@ -6,14 +6,17 @@
 #include "astar.hpp"
 
 
-SlidingBlocks::Node::Node(StatePtr state, NodePtr parent): State(state), Parent(parent), G(0), H(0)  { }
+SlidingBlocks::Node::Node(SlidingBlocks::StatePtr state, SlidingBlocks::NodePtr parent):
+    State(state), Parent(parent), G(0), H(0)
+{
+}
 
-bool SlidingBlocks::Node::operator<(const Node& other)
+bool SlidingBlocks::Node::operator<(const SlidingBlocks::Node& other)
 {
     return H < other.H;
 }
 
-std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const State& source, const State& target, HeuristicFunction heuristic)
+std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const SlidingBlocks::State& source, const SlidingBlocks::State& target, SlidingBlocks::HeuristicFunction heuristic)
 {
     std::list<NodePtr> openSet;
     std::vector<NodePtr> closedSet;

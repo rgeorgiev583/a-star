@@ -27,7 +27,7 @@ namespace SlidingBlocks
     };
 
 
-    std::vector<SlidingBlocks::StatePtr> FindPath(const State& source, const State& target, HeuristicFunction heuristic = ManhattanDistance);
+    std::vector<StatePtr> FindPath(const State& source, const State& target, HeuristicFunction heuristic = ManhattanDistance);
 }
 
 
