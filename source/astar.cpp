@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <memory>
 
-#include "AStar.hpp"
+#include "astar.hpp"
 
 
 SlidingBlocks::Node::Node(StatePtr state, NodePtr parent): State(state), Parent(parent), G(0), H(0)  { }

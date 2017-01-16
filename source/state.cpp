@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "State.hpp"
+#include "state.hpp"
 
 
 SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0), movement(SlidingBlocks::Step::None)  { }

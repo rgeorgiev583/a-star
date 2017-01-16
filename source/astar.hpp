@@ -5,7 +5,7 @@
 #include <functional>
 #include <memory>
 
-#include "State.hpp"
+#include "state.hpp"
 
 
 namespace SlidingBlocks
