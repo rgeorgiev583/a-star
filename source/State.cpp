@@ -70,7 +70,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) 
     }
 
     if (canMove)
-        moved->data[emptyCellY][emptyCellX] = 0;
+        moved->data[moved->emptyCellY][moved->emptyCellX] = 0;
     return canMove ? moved : nullptr;
 }
 
