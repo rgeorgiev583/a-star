@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <memory>
 
+#include "state.hpp"
+
 #include "astar.hpp"
 
 
