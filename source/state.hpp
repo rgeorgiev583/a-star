@@ -78,7 +78,7 @@ namespace SlidingBlocks
             return true;
         }
 
-        int Size() const                  { return size; }
+        int Size() const                    { return size; }
 
         const int* operator[](int i) const  { return data[i]; }
         int* operator[](int i)              { return data[i]; }

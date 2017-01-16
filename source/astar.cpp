@@ -30,7 +30,6 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const SlidingBlocks
     while (!openSet.empty())
     {
         auto currentPos = std::min_element(openSet.begin(), openSet.end());
-
         currentNode = *currentPos;
         if (*currentNode->State == target)
             break;
@@ -55,7 +54,6 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const SlidingBlocks
             int totalCost = currentNode->G + ManhattanDistance(*currentNode->State, *neighbor);
             auto successorPos = std::find_if(openSet.begin(), openSet.end(), checkIfIsEqualToNeighbor);
             NodePtr successor;
-
             if (openSet.end() == successorPos)
             {
                 successor = std::make_shared<Node>(neighbor, currentNode);
@@ -79,14 +77,12 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const SlidingBlocks
         move(Step::Up);
     }
 
-    std::vector<SlidingBlocks::StatePtr> path;
-
+    std::vector<StatePtr> path;
     if (!openSet.empty())
         while (currentNode)
         {
             path.push_back(currentNode->State);
             currentNode = currentNode->Parent;
         }
-
     return path;
 }
