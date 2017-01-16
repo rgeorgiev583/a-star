@@ -15,7 +15,6 @@ int main()
         for (int j = 0; j < size; j++)
         {
             scanf("%d", &beginMatrix[i][j]);
-
             if (0 == beginMatrix[i][j])
             {
                 emptyCellY = i;
@@ -25,7 +24,6 @@ int main()
 
     SlidingBlocks::State begin(std::move(beginMatrix), emptyCellY, emptyCellX), end(size, 1);
     auto path = std::move(SlidingBlocks::FindPath(begin, end));
-
     printf("%d\n", path.size() - 1);
 
     for (auto node: path)
