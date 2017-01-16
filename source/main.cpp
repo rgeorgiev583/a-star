@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "AStar.hpp"
+#include "astar.hpp"
 
 
 int main()
