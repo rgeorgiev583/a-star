@@ -16,4 +16,4 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 clean:
-	@rm -rf *.o $(NAME)
+	rm -f *.gch $(OBJ) $(NAME)
