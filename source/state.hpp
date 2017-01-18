@@ -22,9 +22,9 @@ namespace SlidingBlocks
         SquareIntMatrix& operator=(const SquareIntMatrix& other);
         ~SquareIntMatrix();
 
-        bool operator==(const SquareIntMatrix& other) const;
-
         int Size() const;
+
+        bool operator==(const SquareIntMatrix& other) const;
 
         const int* operator[](int i) const;
         int* operator[](int i);

@@ -62,6 +62,11 @@ SlidingBlocks::SquareIntMatrix::~SquareIntMatrix()
     destroy();
 }
 
+int SlidingBlocks::SquareIntMatrix::Size() const
+{
+    return size;
+}
+
 bool SlidingBlocks::SquareIntMatrix::operator==(const SlidingBlocks::SquareIntMatrix& other) const
 {
     if (size != other.Size())
@@ -73,11 +78,6 @@ bool SlidingBlocks::SquareIntMatrix::operator==(const SlidingBlocks::SquareIntMa
                 return false;
 
     return true;
-}
-
-int SlidingBlocks::SquareIntMatrix::Size() const
-{
-    return size;
 }
 
 const int* SlidingBlocks::SquareIntMatrix::operator[](int i) const
