@@ -31,7 +31,7 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const SlidingBlocks
     {
         auto currentPos = std::min_element(openSet.begin(), openSet.end());
         currentNode = *currentPos;
-        if (*currentNode->State == target)
+        if (target == *currentNode->State)
             break;
 
         openSet.erase(currentPos);

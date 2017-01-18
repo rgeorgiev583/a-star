@@ -8,18 +8,18 @@ void SlidingBlocks::SquareIntMatrix::copy(const SlidingBlocks::SquareIntMatrix& 
     size = other.size;
     data = new int*[size];
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; ++i)
     {
         data[i] = new int[size];
 
-        for (int j = 0; j < size; j++)
+        for (int j = 0; j < size; ++j)
             data[i][j] = other.data[i][j];
     }
 }
 
 void SlidingBlocks::SquareIntMatrix::destroy()
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; ++i)
         delete data[i];
 
     delete data;
@@ -36,7 +36,7 @@ SlidingBlocks::SquareIntMatrix::SquareIntMatrix(int _size):
 {
     data = new int*[size];
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; ++i)
         data[i] = new int[size];
 }
 
@@ -67,8 +67,8 @@ bool SlidingBlocks::SquareIntMatrix::operator==(const SlidingBlocks::SquareIntMa
     if (size != other.Size())
         return false;
 
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++)
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
             if (data[i][j] != other.data[i][j])
                 return false;
 
@@ -95,8 +95,8 @@ SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0), movement(SlidingBlo
 
 SlidingBlocks::State::State(int n, int begin): SquareIntMatrix(n), movement(SlidingBlocks::Step::None)
 {
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++)
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
             data[i][j] = begin++;
 
     emptyCellX = emptyCellY = size - 1;
@@ -116,7 +116,7 @@ SlidingBlocks::Step SlidingBlocks::SquareIntMatrix::GetMovement() const
 bool SlidingBlocks::State::operator==(const SlidingBlocks::State& other) const
 {
     return SquareIntMatrix::operator==(other) &&
-           emptyCellX == other.emptyCellX && emptyCellY == other.emptyCellY;
+           emptyCellY == other.emptyCellY && emptyCellX == other.emptyCellX;
 }
 
 std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::Step movement) const
@@ -171,9 +171,9 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::
 
 void SlidingBlocks::State::Print() const
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; ++i)
     {
-        for (int j = 0; j < size; j++)
+        for (int j = 0; j < size; ++j)
             printf("%d ", data[i][j]);
 
         printf("\n");
@@ -189,8 +189,8 @@ int SlidingBlocks::ManhattanDistance(const SlidingBlocks::State& from, const Sli
 
     int count = 0;
 
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++)
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
             if (from[i][j] != to[i][j])
                 count++;
 
