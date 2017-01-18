@@ -1,5 +1,5 @@
 MKDIR := mkdir -p
-RM := rm -f
+RM := rm -rf
 
 BINDIR := bin
 OBJDIR := obj
@@ -31,4 +31,4 @@ $(BIN): $(OBJ) $(BINDIR)
 all: $(BIN)
 
 clean:
-	$(RM) $(CH) $(OBJ) $(BIN)
+	$(RM) $(CH) $(OBJDIR) $(BINDIR)
