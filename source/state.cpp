@@ -108,7 +108,7 @@ SlidingBlocks::State::State(const SlidingBlocks::SquareIntMatrix& matrix, int _e
 {
 }
 
-SlidingBlocks::Step SlidingBlocks::SquareIntMatrix::GetMovement() const
+SlidingBlocks::Step SlidingBlocks::State::GetMovement() const
 {
     return movement;
 }
