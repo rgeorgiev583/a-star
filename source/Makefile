@@ -16,6 +16,8 @@ endif
 
 .PHONY: all clean
 
+all: $(BIN)
+
 $(BINDIR):
 	$(MKDIR) $@
 
@@ -27,8 +29,6 @@ $(OBJDIR)/%.o: %.cpp $(OBJDIR)
 
 $(BIN): $(OBJ) $(BINDIR)
 	$(CXX) $(LDFLAGS) $(OBJ) -o $@
-
-all: $(BIN)
 
 clean:
 	$(RM) $(CH) $(OBJDIR) $(BINDIR)
