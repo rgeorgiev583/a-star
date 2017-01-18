@@ -11,8 +11,8 @@ int main()
     int size = sqrt(n + 1), emptyCellY = 0, emptyCellX = 0;
     SlidingBlocks::SquareIntMatrix beginMatrix(size);
 
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++)
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
         {
             scanf("%d", &beginMatrix[i][j]);
             if (0 == beginMatrix[i][j])

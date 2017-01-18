@@ -175,7 +175,6 @@ void SlidingBlocks::State::Print() const
     {
         for (int j = 0; j < size; ++j)
             printf("%d ", data[i][j]);
-
         printf("\n");
     }
 }
@@ -183,16 +182,13 @@ void SlidingBlocks::State::Print() const
 int SlidingBlocks::ManhattanDistance(const SlidingBlocks::State& from, const SlidingBlocks::State& to)
 {
     int size = from.Size();
-
     if (size != to.Size())
         return -1;
 
     int count = 0;
-
     for (int i = 0; i < size; ++i)
         for (int j = 0; j < size; ++j)
             if (from[i][j] != to[i][j])
                 count++;
-
     return count;
 }
