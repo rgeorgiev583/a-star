@@ -18,17 +18,17 @@ endif
 
 all: $(BIN)
 
+$(BIN): $(OBJ) $(BINDIR)
+	$(CXX) $(LDFLAGS) $(OBJ) -o $@
+
+$(OBJDIR)/%.o: %.cpp $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 $(BINDIR):
 	$(MKDIR) $@
 
 $(OBJDIR):
 	$(MKDIR) $@
-
-$(OBJDIR)/%.o: %.cpp $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-$(BIN): $(OBJ) $(BINDIR)
-	$(CXX) $(LDFLAGS) $(OBJ) -o $@
 
 clean:
 	$(RM) $(CH) $(OBJDIR) $(BINDIR)
