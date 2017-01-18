@@ -3,6 +3,91 @@
 #include "state.hpp"
 
 
+void SlidingBlocks::SquareIntMatrix::copy(const SlidingBlocks::SquareIntMatrix& other)
+{
+    size = other.size;
+    data = new int*[size];
+
+    for (int i = 0; i < size; i++)
+    {
+        data[i] = new int[size];
+
+        for (int j = 0; j < size; j++)
+            data[i][j] = other.data[i][j];
+    }
+}
+
+void SlidingBlocks::SquareIntMatrix::destroy()
+{
+    for (int i = 0; i < size; i++)
+        delete data[i];
+
+    delete data;
+    data = nullptr;
+}
+
+SlidingBlocks::SquareIntMatrix::SquareIntMatrix(): data(nullptr), size(0)
+{
+}
+
+SlidingBlocks::SquareIntMatrix::SquareIntMatrix(int _size): data(nullptr), size(_size)
+{
+    data = new int*[size];
+
+    for (int i = 0; i < size; i++)
+        data[i] = new int[size];
+}
+
+SlidingBlocks::SquareIntMatrix::SquareIntMatrix(const SlidingBlocks::SquareIntMatrix& other): data(nullptr)
+{
+    copy(other);
+}
+
+SlidingBlocks::SquareIntMatrix& SlidingBlocks::SquareIntMatrix::operator=(const SlidingBlocks::SquareIntMatrix& other)
+{
+    if (&other != this)
+    {
+        destroy();
+        copy(other);
+    }
+
+    return *this;
+}
+
+SlidingBlocks::SquareIntMatrix::~SquareIntMatrix()
+{
+    destroy();
+}
+
+bool SlidingBlocks::SquareIntMatrix::operator==(const SlidingBlocks::SquareIntMatrix& other) const
+{
+    if (size != other.Size())
+        return false;
+
+    for (int i = 0; i < size; i++)
+        for (int j = 0; j < size; j++)
+            if (data[i][j] != other.data[i][j])
+                return false;
+
+    return true;
+}
+
+int SlidingBlocks::SquareIntMatrix::Size() const
+{
+    return size;
+}
+
+const int* SlidingBlocks::SquareIntMatrix::operator[](int i) const
+{
+    return data[i];
+}
+
+int* SlidingBlocks::SquareIntMatrix::operator[](int i)
+{
+    return data[i];
+}
+
+
 SlidingBlocks::State::State(): emptyCellY(0), emptyCellX(0), movement(SlidingBlocks::Step::None)  { }
 
 SlidingBlocks::State::State(int n, int begin): SquareIntMatrix(n), movement(SlidingBlocks::Step::None)
@@ -15,8 +100,13 @@ SlidingBlocks::State::State(int n, int begin): SquareIntMatrix(n), movement(Slid
     data[emptyCellY][emptyCellX] = 0;
 }
 
-SlidingBlocks::State::State(const SquareIntMatrix& matrix, int _emptyCellY, int _emptyCellX):
+SlidingBlocks::State::State(const SlidingBlocks::SquareIntMatrix& matrix, int _emptyCellY, int _emptyCellX):
         SquareIntMatrix(matrix), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX), movement(SlidingBlocks::Step::None)  { }
+
+SlidingBlocks::Step SlidingBlocks::SquareIntMatrix::GetMovement() const
+{
+    return movement;
+}
 
 bool SlidingBlocks::State::operator==(const SlidingBlocks::State& other) const
 {
@@ -24,7 +114,7 @@ bool SlidingBlocks::State::operator==(const SlidingBlocks::State& other) const
            emptyCellX == other.emptyCellX && emptyCellY == other.emptyCellY;
 }
 
-std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(Step movement) const
+std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::Step movement) const
 {
     auto canMove = false;
     auto moved = std::make_shared<SlidingBlocks::State>(*this);
@@ -85,7 +175,7 @@ void SlidingBlocks::State::Print() const
     }
 }
 
-int SlidingBlocks::ManhattanDistance(const State& from, const State& to)
+int SlidingBlocks::ManhattanDistance(const SlidingBlocks::State& from, const SlidingBlocks::State& to)
 {
     int size = from.Size();
 
