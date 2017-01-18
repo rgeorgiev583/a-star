@@ -26,7 +26,7 @@ $(OBJDIR)/%.o: %.cpp $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BIN): $(OBJ) $(BINDIR)
-	$(LD) $(LDFLAGS) $(OBJ) -o $@
+	$(CXX) $(LDFLAGS) $(OBJ) -o $@
 
 all: $(BIN)
 
