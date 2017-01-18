@@ -26,11 +26,13 @@ void SlidingBlocks::SquareIntMatrix::destroy()
     data = nullptr;
 }
 
-SlidingBlocks::SquareIntMatrix::SquareIntMatrix(): data(nullptr), size(0)
+SlidingBlocks::SquareIntMatrix::SquareIntMatrix():
+        data(nullptr), size(0)
 {
 }
 
-SlidingBlocks::SquareIntMatrix::SquareIntMatrix(int _size): data(nullptr), size(_size)
+SlidingBlocks::SquareIntMatrix::SquareIntMatrix(int _size):
+        data(nullptr), size(_size)
 {
     data = new int*[size];
 
@@ -38,14 +40,15 @@ SlidingBlocks::SquareIntMatrix::SquareIntMatrix(int _size): data(nullptr), size(
         data[i] = new int[size];
 }
 
-SlidingBlocks::SquareIntMatrix::SquareIntMatrix(const SlidingBlocks::SquareIntMatrix& other): data(nullptr)
+SlidingBlocks::SquareIntMatrix::SquareIntMatrix(const SlidingBlocks::SquareIntMatrix& other):
+        data(nullptr)
 {
     copy(other);
 }
 
 SlidingBlocks::SquareIntMatrix& SlidingBlocks::SquareIntMatrix::operator=(const SlidingBlocks::SquareIntMatrix& other)
 {
-    if (&other != this)
+    if (this != &other)
     {
         destroy();
         copy(other);
@@ -101,7 +104,9 @@ SlidingBlocks::State::State(int n, int begin): SquareIntMatrix(n), movement(Slid
 }
 
 SlidingBlocks::State::State(const SlidingBlocks::SquareIntMatrix& matrix, int _emptyCellY, int _emptyCellX):
-        SquareIntMatrix(matrix), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX), movement(SlidingBlocks::Step::None)  { }
+        SquareIntMatrix(matrix), emptyCellY(_emptyCellY), emptyCellX(_emptyCellX), movement(SlidingBlocks::Step::None)
+{
+}
 
 SlidingBlocks::Step SlidingBlocks::SquareIntMatrix::GetMovement() const
 {
