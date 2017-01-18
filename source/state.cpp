@@ -131,7 +131,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::
             if (moved->emptyCellX < Size() - 1)
             {
                 moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY][moved->emptyCellX + 1];
-                moved->emptyCellX++;
+                ++moved->emptyCellX;
                 canMove = true;
             }
             break;
@@ -140,7 +140,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::
             if (moved->emptyCellX > 0)
             {
                 moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY][moved->emptyCellX - 1];
-                moved->emptyCellX--;
+                --moved->emptyCellX;
                 canMove = true;
             }
             break;
@@ -149,7 +149,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::
             if (moved->emptyCellY < Size() - 1)
             {
                 moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY + 1][moved->emptyCellX];
-                moved->emptyCellY++;
+                ++moved->emptyCellY;
                 canMove = true;
             }
             break;
@@ -158,7 +158,7 @@ std::shared_ptr<SlidingBlocks::State> SlidingBlocks::State::Move(SlidingBlocks::
             if (moved->emptyCellY > 0)
             {
                 moved->data[moved->emptyCellY][moved->emptyCellX] = moved->data[moved->emptyCellY - 1][moved->emptyCellX];
-                moved->emptyCellY--;
+                --moved->emptyCellY;
                 canMove = true;
             }
             break;

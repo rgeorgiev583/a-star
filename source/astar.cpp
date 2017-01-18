@@ -45,7 +45,7 @@ std::vector<SlidingBlocks::StatePtr> SlidingBlocks::FindPath(const SlidingBlocks
 
             auto checkIfIsEqualToNeighbor = [neighbor](auto item)
             {
-                return *item->State == *neighbor;
+                return *neighbor == *item->State;
             };
 
             if (closedSet.end() != std::find_if(closedSet.begin(), closedSet.end(), checkIfIsEqualToNeighbor))
