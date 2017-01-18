@@ -1,19 +1,34 @@
-NAME := astar
+MKDIR := mkdir -p
+RM := rm -f
+
+BINDIR := bin
+OBJDIR := obj
+
+BIN := $(BINDIR)/astar
 SRC := $(wildcard *.cpp)
-OBJ := $(patsubst %.cpp,%.o,$(SRC))
+OBJ := $(addprefix $(OBJDIR)/,$(patsubst %.cpp,%.o,$(SRC)))
+CH := $(wildcard *.gch)
 ifdef DEBUG
-CXXFLAGS += -g
+CXXFLAGS += -g -Og
+else
+CXXFLAGS += -O3
 endif
 
 .PHONY: all clean
 
-%.o: %.cpp
+$(BINDIR):
+	$(MKDIR) $@
+
+$(OBJDIR):
+	$(MKDIR) $@
+
+$(OBJDIR)/%.o: %.cpp $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+$(BIN): $(OBJ) $(BINDIR)
+	$(LD) $(LDFLAGS) $(OBJ) -o $@
 
-all: $(NAME)
+all: $(BIN)
 
 clean:
-	rm -f *.gch $(OBJ) $(NAME)
+	$(RM) $(CH) $(OBJ) $(BIN)
