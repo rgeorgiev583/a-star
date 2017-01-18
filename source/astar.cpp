@@ -9,7 +9,7 @@
 
 
 SlidingBlocks::Node::Node(SlidingBlocks::StatePtr state, SlidingBlocks::NodePtr parent):
-    State(state), Parent(parent), G(0), H(0)
+        State(state), Parent(parent), G(0), H(0)
 {
 }
 
